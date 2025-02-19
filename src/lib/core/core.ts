@@ -11,6 +11,7 @@ import UserStore from '../../stores/userStore';
 import CodeStore from '../../stores/codeStore.js';
 import TimelineStore from '../../stores/timelineStore';
 import ConfigStore from '../../stores/configStore.js';
+import stc from 'string-to-color';
 
 let timeline, maxStopLength, stopSliderValue, samplingInterval, smallDataThreshold;
 
@@ -443,9 +444,9 @@ export class Core {
 			const existingCodes = currentEntries.map((entry) => entry.code);
 			const newEntries = uniqueCodes
 				.filter((code) => !existingCodes.includes(code))
-				.map((code, index) => ({
+				.map((code) => ({
 					code,
-					color: USER_COLORS[(index + currentEntries.length) % USER_COLORS.length],
+					color: stc(code), // Use string-to-color to generate the color
 					enabled: true
 				}));
 
